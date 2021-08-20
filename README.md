@@ -1,6 +1,6 @@
 # speeduino-lps
 
-Displays a running log of Speeduino's loops-per-second.
+Command-line utility that displays a running log of Speeduino's loops-per-second.
 
 ## Installation
 
@@ -10,7 +10,8 @@ npm install -g speeduino-lps
 
 ## Example
 ```
-$ yarn start
+$ npm install -g speeduino-lps
+$ speeduino-lps
 Serial ports available:-
 [1]: /dev/tty.Bluetooth-Incoming-Port
 [2]: /dev/tty.usbserial-0001
