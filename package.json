@@ -1,15 +1,15 @@
 {
   "name": "speeduino-lps",
   "repository": "github:rob-deutsch/speeduino-tps",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "bin": "lib/index.js",
-  "prepublish": "tsc",
+  "bin": "./lib/index.js",
   "scripts": {
     "start": "tsc && node lib/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "tsc"
   },
   "author": "",
   "license": "ISC",
