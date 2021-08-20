@@ -1,10 +1,11 @@
 {
   "name": "speeduino-lps",
   "repository": "github:rob-deutsch/speeduino-tps",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "bin": "lib/index.js",
   "prepublish": "tsc",
   "scripts": {
     "start": "tsc && node lib/index.js",
