@@ -3,7 +3,6 @@
 import SerialPort from 'serialport'
 import prompt from 'prompt';
 import { SpeeduinoComm } from 'speeduino-comm'
-import { mainModule } from 'process';
 
 async function logLPS(portPath: string, interval: number) {
     // Setup the required connections
@@ -44,7 +43,8 @@ async function logLPS(portPath: string, interval: number) {
     }
 }
 
-async function main() {
+
+async function promptForDevicePath(): Promise<string> {
     const ports = await SerialPort.list()
     console.log("Serial ports available:-")
     for (let idx in ports) {
@@ -65,8 +65,12 @@ async function main() {
         }
     }]
 
-    const choice = await prompt.get(schema)
-    const portPath = ports[parseInt(choice['id'] as string) - 1].path
+    return prompt.get(schema).then(choice => ports[parseInt(choice['id'] as string) - 1].path)
+}
+
+
+async function main() {
+    const portPath = await promptForDevicePath()
 
     const continuallLogCPS = async (interval: number) => {
         while (true) {
