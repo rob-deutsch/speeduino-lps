@@ -3,6 +3,11 @@
 import SerialPort from 'serialport'
 import prompt from 'prompt';
 import { SpeeduinoComm } from 'speeduino-comm'
+import { Command } from 'commander';
+const program = new Command();
+
+program.option('-d, --device <dev>', 'serial device')
+program.parse(process.argv)
 
 async function logLPS(portPath: string, interval: number) {
     // Setup the required connections
@@ -70,7 +75,13 @@ async function promptForDevicePath(): Promise<string> {
 
 
 async function main() {
-    const portPath = await promptForDevicePath()
+    let portPath: string
+
+    if (program.opts().device) {
+        portPath = program.opts().device
+    } else {
+        portPath = await promptForDevicePath()
+    }
 
     const continuallLogCPS = async (interval: number) => {
         while (true) {
