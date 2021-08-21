@@ -18,6 +18,7 @@ Serial ports available:-
 [3]: /dev/tty.SLAB_USBtoUART
 
 prompt: Enter serial port ID:  2
+
 Signature: speeduino 202108
 Version info: Speeduino 2021.08
 2021-08-20T15:55:05.655Z Loops per second: 6787
@@ -25,3 +26,7 @@ Version info: Speeduino 2021.08
 2021-08-20T15:55:07.653Z Loops per second: 7634
 2021-08-20T15:55:08.658Z Loops per second: 8670
 ```
+
+## See also
+
+[js-speeduino-comm](https://github.com/rob-deutsch/js-speeduino-comm): A Javascript library to communicate with Speeduino.
