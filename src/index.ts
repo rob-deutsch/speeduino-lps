@@ -34,6 +34,15 @@ async function promptForDevicePath(): Promise<string> {
     return prompt.get(schema).then(choice => ports[parseInt(choice['id'] as string) - 1].path)
 }
 
+async function toothLogReady(speedy: SpeeduinoComm, checkInterval: number): Promise<void> {
+    let int = new Promise<void>(resolve => setTimeout(resolve, checkInterval))
+    let och = Buffer.alloc(2)
+    while (!(och[1]>>6)) {
+        och = await speedy.raw.outputChannels(121,0,0x30,0)
+    }
+    return int
+}
+
 
 async function main() {
     let portPath: string
@@ -54,14 +63,13 @@ async function main() {
         }
         speedy.startToothLogger().then(() => {
             console.log("Tooth logger started");
-            return new Promise<void>(resolve => setTimeout(resolve, 5000))
         }).then(async () => {
             while (true) {
-                const teethTime = await speedy.toothLog()
+                await toothLogReady(speedy, 1000/5)
+                let teethTime = await speedy.toothLog()
                 for (let t of teethTime) {
                     console.log(t);
                 }
-                await new Promise<void>(resolve => setTimeout(resolve, 5000))
             }
         })
     })
